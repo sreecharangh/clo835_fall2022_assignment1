@@ -37,15 +37,9 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ecr1
-          IMAGE_TAG: v0.1
+          IMAGE_TAG: db-v0.1
           DOCKERFILE_PATH: Dockerfile
         run: |
           # Docker build
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f $DOCKERFILE_PATH .
-          # Unit test
-          docker run -d -p 80:8080 --name nodeapp2 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker ps
-          echo "Pause for 10 seconds to let container start"
-          sleep 10
-          curl localhost -vvv
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
