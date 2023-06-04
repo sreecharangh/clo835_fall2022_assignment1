@@ -29,8 +29,6 @@ jobs:
           IMAGE_TAG: v0.1
           DOCKERFILE_PATH: Dockerfile_mysql
         run: |
-          cd Chapter02/kubia/
-          ls -ltra
           # Docker build
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f $DOCKERFILE_PATH .
           # Unit test
@@ -48,8 +46,6 @@ jobs:
           IMAGE_TAG: v0.1
           DOCKERFILE_PATH: Dockerfile
         run: |
-          cd Chapter02/kubia/
-          ls -ltra
           # Docker build
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f $DOCKERFILE_PATH .
           # Unit test
