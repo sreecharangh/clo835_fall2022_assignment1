@@ -11,7 +11,7 @@ DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
 DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
-COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
+COLOR_FROM_ENV = os.environ.get('APP_COLOR') 
 DBPORT = int(os.environ.get("DBPORT"))
 
 # Create a connection to the MySQL database
@@ -42,7 +42,7 @@ color_codes = {
 SUPPORTED_COLORS = ",".join(color_codes.keys())
 
 # Generate a random color
-COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lime"])
+COLOR = COLOR_FROM_ENV
 
 
 @app.route("/", methods=['GET', 'POST'])
