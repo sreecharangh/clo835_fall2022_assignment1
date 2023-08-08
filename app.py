@@ -3,7 +3,7 @@ from pymysql import connections
 import os
 import random
 import argparse
-
+import requests
 
 app = Flask(__name__)
 
@@ -13,6 +13,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') 
 DBPORT = int(os.environ.get("DBPORT"))
+BACKGROUND_IMAGE_URL = os.environ.get("BACKGROUND_IMAGE_URL")
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -47,19 +48,13 @@ COLOR = COLOR_FROM_ENV
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', color=color_codes[COLOR])
+    app.logger.info(f"Background image URL: {BACKGROUND_IMAGE_URL}")
+    return render_template('addemp.html', background_image=BACKGROUND_IMAGE_URL)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('about.html', color=color_codes[COLOR])
-    
-@app.route("/addemp", methods=['POST'])
-def AddEmp():
-    emp_id = request.form['emp_id']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    primary_skill = request.form['primary_skill']
-    location = request.form['location']
+    app.logger.info(f"Background image URL: {BACKGROUND_IMAGE_URL}")
+    return render_template('about.html', background_image=BACKGROUND_IMAGE_URL)
 
   
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
@@ -133,4 +128,4 @@ if __name__ == '__main__':
         print("Color not supported. Received '" + COLOR + "' expected one of " + SUPPORTED_COLORS)
         exit(1)
 
-    app.run(host='0.0.0.0',port=8080,debug=True)
+    app.run(host='0.0.0.0',port=81,debug=True)
