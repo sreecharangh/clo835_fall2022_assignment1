@@ -26,7 +26,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ecr1
-          IMAGE_TAG: v3
+          IMAGE_TAG: v4
           DOCKERFILE_PATH: Dockerfile 
         run: |
           # Docker build
