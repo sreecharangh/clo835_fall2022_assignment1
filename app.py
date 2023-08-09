@@ -56,6 +56,13 @@ def home():
 def about():
     app.logger.info(f"Background image URL: {BACKGROUND_IMAGE_URL}")
     return render_template('about.html', background_image=BACKGROUND_IMAGE_URL, your_name=YOUR_NAME)
+@app.route("/addemp", methods=['POST'])
+def AddEmp():
+    emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    primary_skill = request.form['primary_skill']
+    location = request.form['location']
 
   
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
