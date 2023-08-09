@@ -26,19 +26,8 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ecr1
-          IMAGE_TAG: v4
+          IMAGE_TAG: v5
           DOCKERFILE_PATH: Dockerfile 
-        run: |
-          # Docker build
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f $DOCKERFILE_PATH .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-      - name: Build and push Docker image 2
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ecr2
-          IMAGE_TAG: v3
-          DOCKERFILE_PATH: Dockerfile_mysql
         run: |
           # Docker build
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f $DOCKERFILE_PATH .
