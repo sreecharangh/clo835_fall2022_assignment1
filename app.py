@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, current_app
 from pymysql import connections
 import os
 import random
@@ -14,6 +14,7 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') 
 DBPORT = int(os.environ.get("DBPORT"))
 BACKGROUND_IMAGE_URL = os.environ.get("BACKGROUND_IMAGE_URL")
+YOUR_NAME = os.environ.get("YOUR_NAME", "SENECA TEAM")  
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -49,12 +50,12 @@ COLOR = COLOR_FROM_ENV
 @app.route("/", methods=['GET', 'POST'])
 def home():
     app.logger.info(f"Background image URL: {BACKGROUND_IMAGE_URL}")
-    return render_template('addemp.html', background_image=BACKGROUND_IMAGE_URL)
+    return render_template('addemp.html', background_image=BACKGROUND_IMAGE_URL, your_name=YOUR_NAME)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
     app.logger.info(f"Background image URL: {BACKGROUND_IMAGE_URL}")
-    return render_template('about.html', background_image=BACKGROUND_IMAGE_URL)
+    return render_template('about.html', background_image=BACKGROUND_IMAGE_URL, your_name=YOUR_NAME)
 
   
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--color', required=False)
     args = parser.parse_args()
-
+    your_name = os.environ.get("YOUR_NAME", "SENECA_TEAM")
     if args.color:
         print("Color from command line argument =" + args.color)
         COLOR = args.color
