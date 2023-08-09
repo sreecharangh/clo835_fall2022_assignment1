@@ -11,10 +11,10 @@ DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
 DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
-COLOR_FROM_ENV = os.environ.get('APP_COLOR') 
-DBPORT = int(os.environ.get("DBPORT"))
-BACKGROUND_IMAGE_URL = os.environ.get("BACKGROUND_IMAGE_URL")
-YOUR_NAME = os.environ.get("YOUR_NAME", "SENECA_TEAM")  
+COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "white"
+DBPORT = int(os.environ.get("DBPORT")) or 3306
+BACKGROUND_IMAGE_URL = os.environ.get("BACKGROUND_IMAGE_URL") 
+YOUR_NAME = os.environ.get("YOUR_NAME", "SENECA_TEAM")  or "Sree"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
